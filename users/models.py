@@ -9,10 +9,11 @@ class User(AbstractUser):
         USER  = 'user',  'Usuário'
 
     role       = models.CharField(max_length=10, choices=Role.choices, default=Role.USER)
+    phone      = models.CharField(max_length=20, blank=True)
     department = models.CharField(max_length=100, blank=True)
+    company    = models.CharField(max_length=100, blank=True)
     avatar     = models.ImageField(upload_to='avatars/', blank=True, null=True)
 
-    # Resolve o conflito de reverse accessor
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='custom_user_set',
