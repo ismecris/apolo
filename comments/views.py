@@ -8,7 +8,7 @@ class CommentListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Comment.objects.filter(ticket_id=self.kwargs['ticket_id'])
+        return Comment.objects.filter(ticket_id=self.kwargs['ticket_id']).order_by('created_at')
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user, ticket_id=self.kwargs['ticket_id'])
